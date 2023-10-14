@@ -6,7 +6,6 @@ services:
         working_dir: /application
         volumes:
             - '.:/application'
-            - './cli/import.sql:/docker-entrypoint-initdb.d/import.sql'
         environment:
             - 'MYSQL_ROOT_PASSWORD=${MARIADB_ROOT_USER}'
             - 'MYSQL_DATABASE=${MARIADB_DB_NAME}'

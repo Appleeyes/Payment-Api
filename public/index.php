@@ -18,7 +18,10 @@ $app->get('/v1', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-
+$app->get('/v1/methods', function (Request $request, Response $response, $args) {
+    $response->getBody()->write("Hello world!");
+    return $response;
+});
 
 $handler = new ErrorHandler($app);
 
