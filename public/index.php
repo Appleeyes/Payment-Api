@@ -1,6 +1,7 @@
 <?php
 
 use Dotenv\Dotenv;
+use PaymentApi\Controller\MethodsController;
 use PaymentApi\Middleware\ErrorHandler;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -13,15 +14,7 @@ $dotenv->safeLoad();
 
 $app = AppFactory::create();
 
-$app->get('/v1', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
-
-$app->get('/v1/methods', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Hello world!");
-    return $response;
-});
+$app->get('/v1/methods', 'MethodsController:indexAction');
 
 $handler = new ErrorHandler($app);
 
