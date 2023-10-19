@@ -1,23 +1,22 @@
 <?php
 
 use Dotenv\Dotenv;
-use PaymentApi\Controller\MethodsController;
 use PaymentApi\Middleware\ErrorHandler;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/container.php';
+
 
 $dotenv = Dotenv::createImmutable(__DIR__ . "/..");
 $dotenv->safeLoad();
 
-$app = AppFactory::create();
+$app = AppFactory::create(container: $container);
 
-$app->get('/v1/methods', 'MethodsController:indexAction');
+$app->get('/v1/methods', '\PaymentApi\Controller\MethodsController:indexAction');
 
 $handler = new ErrorHandler($app);
 
-$errorMiddleware = $app->addErrorMiddleware(false, true, true);
+$errorMiddleware = $app->addErrorMiddleware(true, true, true);
 $errorMiddleware->setDefaultErrorHandler($handler);
 $app->run();

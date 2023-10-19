@@ -5,6 +5,9 @@ use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use Dotenv\Dotenv;
+use Monolog\Handler\StreamHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use PaymentApi\Repository\MethodsRepository;
 use PaymentApi\Repository\MethodsRepositoryDoctrine;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
@@ -77,6 +80,18 @@ $container->set(EntityManager::class, function (Container $c): EntityManager {
 $container->set(MethodsRepository::class, function (Container $container) {
     $em = $container->get(EntityManager::class);
     return new MethodsRepositoryDoctrine($em);
+});
+
+$container->set(Logger::class, function (Container $container) {
+    $logger = new Logger('paymentAPI');
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/alert.log', Level::Alert)));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/critical.log', Level::Critical)));
+    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/error.log', Level::Error));
+    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/warning.log', Level::Warning));
+    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/notice.log', Level::Notice));
+    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/info.log', Level::Info));
+    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/debug.log', Level::Debug));
+    return $logger;
 });
 
 return $container;

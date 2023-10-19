@@ -1,0 +1,3 @@
+[2023-10-14T19:44:21.344658+00:00] paymentAPI.DEBUG: PDO::__construct(): Argument #1 ($dsn) must be a valid data source name [] []
+[2023-10-14T19:45:27.093761+00:00] paymentAPI.DEBUG: PDO::__construct(): Argument #1 ($dsn) must be a valid data source name [] []
+[2023-10-14T19:46:53.003451+00:00] paymentAPI.DEBUG: PDO::__construct(): Argument #1 ($dsn) must be a valid data source name [] []
