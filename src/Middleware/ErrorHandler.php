@@ -28,10 +28,11 @@ final class ErrorHandler
 
         if($exception instanceof ORMException || $exception instanceof HttpNotFoundException || $exception instanceof \PDOException)
         {
-            // $this->logger->debug($exception->getMessage());
+            $this->logger->debug($exception->getMessage());
             $statusCode = 500;
         } else if($exception instanceof A_Exception)
         {
+            $this->logger->alert($exception->getMessage());
             $statusCode = $exception->getCode();
         }
 

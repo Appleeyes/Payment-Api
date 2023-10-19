@@ -5,6 +5,7 @@ use Doctrine\Common\Cache\Psr6\DoctrineProvider;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Setup;
 use Dotenv\Dotenv;
+use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -84,13 +85,13 @@ $container->set(MethodsRepository::class, function (Container $container) {
 
 $container->set(Logger::class, function (Container $container) {
     $logger = new Logger('paymentAPI');
-    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/alert.log', Level::Alert)));
-    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/critical.log', Level::Critical)));
-    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/error.log', Level::Error));
-    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/warning.log', Level::Warning));
-    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/notice.log', Level::Notice));
-    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/info.log', Level::Info));
-    $logger->pushHandler(new StreamHandler(__DIR__ . '/../logs/debug.log', Level::Debug));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/alert.log', Level::Alert))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/critical.log', Level::Critical))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/error.log', Level::Error))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/warning.log', Level::Warning))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/notice.log', Level::Notice))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/info.log', Level::Info))->setFormatter(new JsonFormatter()));
+    $logger->pushHandler((new StreamHandler(__DIR__ . '/../logs/debug.log', Level::Debug))->setFormatter(new JsonFormatter()));
     return $logger;
 });
 
