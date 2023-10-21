@@ -10,3 +10,8 @@
 {"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:43:47.507070+00:00","extra":{}}
 {"message":"No methods found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T19:50:42.350312+00:00","extra":{}}
 {"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:51:12.470321+00:00","extra":{}}
+{"message":"Method created.","context":{"method_id":1},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:27:48.001596+00:00","extra":{}}
+{"message":"Error creating method: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Credit Card' for key 'UNIQ_56E2F7695E237E06'","context":{},"level":400,"level_name":"ERROR","channel":"paymentAPI","datetime":"2023-10-21T21:29:51.461580+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T21:29:56.374736+00:00","extra":{}}
+{"message":"Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:30:13.742691+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T21:30:31.263571+00:00","extra":{}}

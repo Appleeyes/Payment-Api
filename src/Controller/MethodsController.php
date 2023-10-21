@@ -60,5 +60,43 @@ final class MethodsController extends A_Controller
             ->withHeader('Content-Type', 'application/json')
             ->withStatus($statusCode);
     }
+    
+    /**
+     * Method createAction
+     *
+     * @param Request $request [explicite description]
+     * @param Response $response [explicite description]
+     *
+     * @return ResponseInterface
+     */
+    public function createAction(Request $request, Response $response): ResponseInterface
+    {
+        $data = $request->getParsedBody();
+
+        if (!$data || empty($data['name'])) {
+            $this->logger->info('Invalid Data.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
+        // Create a new method entity
+        $method = new Methods();
+        $method->setName($data['name']);
+        $method->setIsActive(true); // You can set the default value here or based on your requirements.
+
+        try {
+            // Save the method to the database using the repository
+            $this->methodsRepository->store($method);
+
+            $this->logger->info('Method created.', ['method_id' => $method->getId()]);
+
+            $response->getBody()->write(json_encode(['message' => 'Method created successfully', 'method_id' => $method->getId()]));
+            return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+        } catch (\Exception $e) {
+            $this->logger->error('Error creating method: ' . $e->getMessage());
+            $response->getBody()->write(json_encode(['message' => 'Error creating method']));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
+    }
 }
 

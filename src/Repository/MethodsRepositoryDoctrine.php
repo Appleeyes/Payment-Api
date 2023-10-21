@@ -24,8 +24,8 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function store(Methods $method): void
     {
-        // $this->em->persist($method);
-        // $this->em->flush();
+        $this->entityManager->persist($method);
+        $this->entityManager->flush();
     }
     
     /**
