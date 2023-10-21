@@ -18,3 +18,5 @@
 {"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:22:48.899004+00:00","extra":{}}
 {"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:23:31.321234+00:00","extra":{}}
 {"message":"Payment Method Reactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:25:25.725896+00:00","extra":{}}
+{"message":"Payment Method Updated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:41:58.404440+00:00","extra":{}}
+{"message":"Payment Method Not Found.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:42:51.076456+00:00","extra":{}}
