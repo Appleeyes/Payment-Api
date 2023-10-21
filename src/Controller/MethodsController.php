@@ -36,8 +36,8 @@ final class MethodsController extends A_Controller
         $methods = $this->methodsRepository->findAll();
 
         if (empty($methods)) {
-            $this->logger->info('No methods found.', ['status_code' => 404]);
-            $data = ['message' => 'No methods found'];
+            $this->logger->info('No payment methods found.', ['status_code' => 404]);
+            $data = ['message' => 'No payment methods found'];
             $statusCode = 404;
         } else {
             $responseData = [];
@@ -49,7 +49,7 @@ final class MethodsController extends A_Controller
                 ];
             }
 
-            $this->logger->info('Methods list retrieved.', ['status_code' => 200]);
+            $this->logger->info('Payment Methods list retrieved.', ['status_code' => 200]);
             $data = $responseData;
             $statusCode = 200;
         }
@@ -79,24 +79,50 @@ final class MethodsController extends A_Controller
             return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
         }
 
-        // Create a new method entity
         $method = new Methods();
         $method->setName($data['name']);
-        $method->setIsActive(true); // You can set the default value here or based on your requirements.
+        $method->setIsActive(true);
 
         try {
-            // Save the method to the database using the repository
             $this->methodsRepository->store($method);
 
-            $this->logger->info('Method created.', ['method_id' => $method->getId()]);
+            $this->logger->info('Payment Method created.', ['method_id' => $method->getId()]);
 
-            $response->getBody()->write(json_encode(['message' => 'Method created successfully', 'method_id' => $method->getId()]));
+            $response->getBody()->write(json_encode(['message' => 'Payment Method created successfully', 'method_id' => $method->getId()]));
             return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
         } catch (\Exception $e) {
-            $this->logger->error('Error creating method: ' . $e->getMessage());
-            $response->getBody()->write(json_encode(['message' => 'Error creating method']));
+            $this->logger->error('Error creating payment method: ' . $e->getMessage());
+            $response->getBody()->write(json_encode(['message' => 'Error payment creating method']));
             return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
     }
+    
+    /**
+     * Method removeAction
+     *
+     * @param Request $request [explicite description]
+     * @param Response $response [explicite description]
+     * @param $args $args [explicite description]
+     *
+     * @return Response
+     */
+    public function removeAction(Request $request, Response $response, $args): Response
+    {
+        $id = $args['id'];
+
+        $method = $this->methodsRepository->findById($id);
+
+        if (!$method) {
+            $this->logger->info('Payment Method Not Found.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Payment Method Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $this->methodsRepository->remove($method);
+        $this->logger->info('Payment Method deleted.', ['statusCode' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Payment Method Deleted']));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+    }
+
 }
 

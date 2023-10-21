@@ -2,3 +2,8 @@
 {"message":"Method created.","context":{"method_id":1},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:27:48.001596+00:00","extra":{}}
 {"message":"Error creating method: An exception occurred while executing a query: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Credit Card' for key 'UNIQ_56E2F7695E237E06'","context":{},"level":400,"level_name":"ERROR","channel":"paymentAPI","datetime":"2023-10-21T21:29:51.461580+00:00","extra":{}}
 {"message":"Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:30:13.742691+00:00","extra":{}}
+{"message":"Method created.","context":{"method_id":3},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:43:16.639257+00:00","extra":{}}
+{"message":"Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T21:44:55.678437+00:00","extra":{}}
+{"message":"Payment Method deleted.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:03:14.703917+00:00","extra":{}}
+{"message":"Payment Method Not Found.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:03:56.758418+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:04:14.569304+00:00","extra":{}}

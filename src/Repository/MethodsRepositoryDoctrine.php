@@ -50,8 +50,8 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function remove(Methods $method): void
     {
-        // $this->em->remove($method);
-        // $this->em->flush();
+        $this->entityManager->remove($method);
+        $this->entityManager->flush();
     }
     
     /**
@@ -72,8 +72,9 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      *
      * @return Methods
      */
-    public function findById(int $methodId): Methods|null
+    public function findById(int $id): Methods|null
     {
-        // return $this->em->getRepository(Methods::class)->find($methodId);
+        $method = $this->entityManager->find(Methods::class, $id);
+        return $method;
     }
 }
