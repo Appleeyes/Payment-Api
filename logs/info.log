@@ -7,3 +7,11 @@
 {"message":"Payment Method deleted.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:03:14.703917+00:00","extra":{}}
 {"message":"Payment Method Not Found.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:03:56.758418+00:00","extra":{}}
 {"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:04:14.569304+00:00","extra":{}}
+{"message":"Payment Method created.","context":{"method_id":4},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:06:49.524066+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:07:46.329114+00:00","extra":{}}
+{"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:12:55.311721+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:13:59.430862+00:00","extra":{}}
+{"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:16:09.548262+00:00","extra":{}}
+{"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:17:48.915181+00:00","extra":{}}
+{"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:17:58.346075+00:00","extra":{}}
+{"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:21:21.572753+00:00","extra":{}}
