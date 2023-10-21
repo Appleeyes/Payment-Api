@@ -2,10 +2,7 @@
 
 namespace PaymentApi\Controller;
 
-use DI\Container;
-use Laminas\Diactoros\Response\JsonResponse;
-use Monolog\Logger;
-use PaymentApi\Exception\DatabaseException;
+
 use PaymentApi\Model\Methods;
 use PaymentApi\Repository\MethodsRepository;
 use Psr\Container\ContainerInterface;
