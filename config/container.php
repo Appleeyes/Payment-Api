@@ -11,6 +11,7 @@ use Monolog\Level;
 use Monolog\Logger;
 use PaymentApi\Repository\MethodsRepository;
 use PaymentApi\Repository\MethodsRepositoryDoctrine;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
@@ -78,10 +79,11 @@ $container->set(EntityManager::class, function (Container $c): EntityManager {
     return EntityManager::create($settings['doctrine']['connection'], $config);
 });
 
-$container->set(MethodsRepository::class, function (Container $container) {
-    $em = $container->get(EntityManager::class);
-    return new MethodsRepositoryDoctrine($em);
+$container->set(MethodsRepository::class, function (ContainerInterface $container) {
+    $entityManager = $container->get(EntityManager::class);
+    return new MethodsRepositoryDoctrine($entityManager);
 });
+
 
 $container->set(Logger::class, function (Container $container) {
     $logger = new Logger('paymentAPI');

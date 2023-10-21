@@ -7,9 +7,11 @@ use PaymentApi\Model\Methods;
 
 class MethodsRepositoryDoctrine implements MethodsRepository
 {
-    private function __construct(private EntityManager $em)
+    private EntityManager $entityManager;
+
+    public function __construct(EntityManager $entityManager)
     {
-        
+        $this->entityManager = $entityManager;
     }
     
         
@@ -22,8 +24,8 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function store(Methods $method): void
     {
-        $this->em->persist($method);
-        $this->em->flush();
+        // $this->em->persist($method);
+        // $this->em->flush();
     }
     
     /**
@@ -35,8 +37,8 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function update(Methods $method): void
     {
-        $this->em->persist($method);
-        $this->em->flush();
+        // $this->em->persist($method);
+        // $this->em->flush();
     }
     
     /**
@@ -48,8 +50,8 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function remove(Methods $method): void
     {
-        $this->em->remove($method);
-        $this->em->flush();
+        // $this->em->remove($method);
+        // $this->em->flush();
     }
     
     /**
@@ -59,8 +61,9 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function findAll(): array
     {
-        return $this->em->getRepository(Methods::class)->findAll();
-    }
+        return $this->entityManager
+            ->getRepository(Methods::class)
+            ->findAll();    }
     
     /**
      * Method findById
@@ -71,6 +74,6 @@ class MethodsRepositoryDoctrine implements MethodsRepository
      */
     public function findById(int $methodId): Methods|null
     {
-        return $this->em->getRepository(Methods::class)->find($methodId);
+        // return $this->em->getRepository(Methods::class)->find($methodId);
     }
 }

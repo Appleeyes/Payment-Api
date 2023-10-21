@@ -25,6 +25,7 @@ final class ErrorHandler
     public function __invoke(Request $request, Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails, ?LoggerInterface $logger = null)
     {
         $logger?->error($exception->getMessage());
+        $statusCode = 500;
 
         if($exception instanceof ORMException || $exception instanceof HttpNotFoundException || $exception instanceof \PDOException)
         {

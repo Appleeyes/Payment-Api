@@ -1,2 +1,12 @@
-[2023-10-19T17:10:54.376157+00:00] paymentAPI.ALERT: Database Exception message: Error! [] []
-[2023-10-19T17:12:56.298283+00:00] paymentAPI.DEBUG: PDO::__construct(): Argument #1 ($dsn) must be a valid data source name [] []
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:23:14.509726+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:28:08.600799+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:28:37.038997+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:33:37.600662+00:00","extra":{}}
+{"message":"Methods list retrieved.","context":{},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T19:36:09.772829+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:36:43.478961+00:00","extra":{}}
+{"message":"No methods found.","context":{},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T19:42:35.837332+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:43:05.545983+00:00","extra":{}}
+{"message":"No methods found.","context":{},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T19:43:34.714933+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:43:47.507070+00:00","extra":{}}
+{"message":"No methods found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T19:50:42.350312+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T19:51:12.470321+00:00","extra":{}}
