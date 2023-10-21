@@ -37,3 +37,8 @@
 {"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T22:18:17.291473+00:00","extra":{}}
 {"message":"Payment Method Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:21:21.572753+00:00","extra":{}}
 {"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T22:21:51.726030+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:22:48.899004+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T22:23:05.955893+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:23:31.321234+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-21T22:23:47.500645+00:00","extra":{}}
+{"message":"Payment Method Reactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-21T22:25:25.725896+00:00","extra":{}}

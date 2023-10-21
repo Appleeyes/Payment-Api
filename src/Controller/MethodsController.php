@@ -153,5 +153,26 @@ final class MethodsController extends A_Controller
         $response->getBody()->write(json_encode(['message' => 'Payment Method Deactivated']));
         return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
     }
+
+    public function reactivateAction(Request $request, Response $response, $args): Response
+    {
+        $id = $args['id'];
+
+        // Retrieve the method by ID
+        $method = $this->methodsRepository->findById($id);
+
+        if (!$method) {
+            $this->logger->info('Payment Method Not Found.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Payment Method Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $method->setIsActive(true);
+        $this->methodsRepository->update($method);
+
+        $this->logger->info('Payment Method Reactivated.', ['statusCode' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Payment Method Reactivated']));
+        return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+    }
 }
 
