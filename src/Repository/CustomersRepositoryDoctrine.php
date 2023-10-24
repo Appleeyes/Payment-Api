@@ -3,7 +3,7 @@
 namespace PaymentApi\Repository;
 
 use Doctrine\ORM\EntityManager;
-use PaymentApi\Model\Methods;
+use PaymentApi\Model\Customers;
 
 class CustomersRepositoryDoctrine implements CustomersRepository
 {
@@ -16,65 +16,65 @@ class CustomersRepositoryDoctrine implements CustomersRepository
     
         
     /**
-     * Method store
+     * customer store
      *
-     * @param Methods $method [explicite description]
+     * @param Customers $customer [explicite description]
      *
      * @return void
      */
-    public function store(Methods $method): void
+    public function store(Customers $customer): void
     {
-        $this->entityManager->persist($method);
+        $this->entityManager->persist($customer);
         $this->entityManager->flush();
     }
     
     /**
-     * Method update
+     * customer update
      *
-     * @param Methods $method [explicite description]
+     * @param Customers $customer [explicite description]
      *
      * @return void
      */
-    public function update(Methods $method): void
+    public function update(Customers $customer): void
     {
-        $this->entityManager->persist($method);
+        $this->entityManager->persist($customer);
         $this->entityManager->flush();
     }
     
     /**
-     * Method remove
+     * customer remove
      *
-     * @param Methods $method [explicite description]
+     * @param Customers $customer [explicite description]
      *
      * @return void
      */
-    public function remove(Methods $method): void
+    public function remove(Customers $customer): void
     {
-        $this->entityManager->remove($method);
+        $this->entityManager->remove($customer);
         $this->entityManager->flush();
     }
     
     /**
-     * Method findAll
+     * customer findAll
      *
      * @return array
      */
     public function findAll(): array
     {
         return $this->entityManager
-            ->getRepository(Methods::class)
+            ->getRepository(Customers::class)
             ->findAll();    }
     
     /**
-     * Method findById
+     * customer findById
      *
-     * @param int $methodId [explicite description]
+     * @param int $customerId [explicite description]
      *
-     * @return Methods
+     * @return Customers
      */
-    public function findById(int $id): Methods|null
+    public function findById(int $id): Customers|null
     {
-        $method = $this->entityManager->find(Methods::class, $id);
-        return $method;
+        $customer = $this->entityManager->find(Customers::class, $id);
+        return $customer;
     }
 }

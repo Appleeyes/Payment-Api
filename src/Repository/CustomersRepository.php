@@ -2,13 +2,13 @@
 
 namespace PaymentApi\Repository;
 
-use PaymentApi\Model\Methods;
+use PaymentApi\Model\Customers;
 
 interface CustomersRepository
 {
-    public function store(Methods $method): void;
-    public function update(Methods $method): void;
-    public function remove(Methods $method): void;
+    public function store(Customers $customer): void;
+    public function update(Customers $customer): void;
+    public function remove(Customers $customer): void;
     public function findAll(): array;
-    public function findById(int $methodId): Methods|null;
+    public function findById(int $customerId): Customers|null;
 }
