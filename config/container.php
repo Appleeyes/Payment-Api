@@ -9,6 +9,8 @@ use Monolog\Formatter\JsonFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
+use PaymentApi\Repository\CustomersRepository;
+use PaymentApi\Repository\CustomersRepositoryDoctrine;
 use PaymentApi\Repository\MethodsRepository;
 use PaymentApi\Repository\MethodsRepositoryDoctrine;
 use Psr\Container\ContainerInterface;
@@ -82,6 +84,11 @@ $container->set(EntityManager::class, function (Container $c): EntityManager {
 $container->set(MethodsRepository::class, function (ContainerInterface $container) {
     $entityManager = $container->get(EntityManager::class);
     return new MethodsRepositoryDoctrine($entityManager);
+});
+
+$container->set(CustomersRepository::class, function (ContainerInterface $container) {
+    $entityManager = $container->get(EntityManager::class);
+    return new CustomersRepositoryDoctrine($entityManager);
 });
 
 
