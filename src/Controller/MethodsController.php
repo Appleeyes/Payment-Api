@@ -10,6 +10,21 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+/**
+ * @OA\Info(
+ *     title="Payment API",
+ *     version="1.0",
+ *     description="API for managing payment methods.",
+ * )
+ */
+
+/**
+ * @OA\Server(
+ *     url="http://localhost:4000",
+ *     description="Payment API Server"
+ * )
+ */
+
 final class MethodsController extends A_Controller
 {
     private MethodsRepository $methodsRepository;
@@ -19,13 +34,37 @@ final class MethodsController extends A_Controller
         parent::__construct($container);
         $this->methodsRepository = $methodsRepository;
     }
-        
+
     /**
-     * Method indexAction
+     * @OA\Get(
+     *     path="/v1/methods",
+     *     tags={"Methods"},
+     *     summary="Retrieve a list of payment methods",
+     *     operationId="indexAction",
+     *     @OA\Response(
+     *         response="200",
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Methods list retrieved."),
+     *             @OA\Property(property="data", type="array", @OA\Items(
+     *                 @OA\Property(property="id", type="integer"),
+     *                 @OA\Property(property="name", type="string"),
+     *                 @OA\Property(property="isActive", type="boolean")
+     *             ))
+     *         )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="No payment methods found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="No payment methods found")
+     *         )
+     *     )
+     * )
      *
-     * @param Request $request [explicite description]
-     * @param Response $response [explicite description]
-     *
+     * @param Request $request
+     * @param Response $response
      * @return ResponseInterface
      */
     public function indexAction(Request $request, Response $response): ResponseInterface
@@ -57,13 +96,45 @@ final class MethodsController extends A_Controller
             ->withHeader('Content-Type', 'application/json')
             ->withStatus($statusCode);
     }
-    
+
     /**
-     * Method createAction
+     * @OA\Post(
+     *     path="/v1/methods",
+     *     tags={"Methods"},
+     *     summary="Create a new payment method",
+     *     operationId="createAction",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="name", type="string", example="Credit Card"),
+     *             @OA\Property(property="isActive", type="boolean", example="true")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment Method created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method created successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Invalid data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid data")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Error creating payment method",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Error creating payment method")
+     *         )
+     *     )
+     * )
      *
-     * @param Request $request [explicite description]
-     * @param Response $response [explicite description]
-     *
+     * @param Request $request
+     * @param Response $response
      * @return ResponseInterface
      */
     public function createAction(Request $request, Response $response): ResponseInterface
@@ -93,14 +164,39 @@ final class MethodsController extends A_Controller
             return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
     }
-    
+
     /**
-     * Method removeAction
+     * @OA\Delete(
+     *     path="/v1/methods/{id}",
+     *     tags={"Methods"},
+     *     summary="Delete a payment method",
+     *     operationId="removeAction",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the payment method to delete",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment Method Deleted",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Deleted")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment Method Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Not Found")
+     *         )
+     *     )
+     * )
      *
-     * @param Request $request [explicite description]
-     * @param Response $response [explicite description]
-     * @param $args $args [explicite description]
-     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
      * @return Response
      */
     public function removeAction(Request $request, Response $response, $args): Response
@@ -120,14 +216,39 @@ final class MethodsController extends A_Controller
         $response->getBody()->write(json_encode(['message' => 'Payment Method Deleted']));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
-    
+
     /**
-     * Method deactivateAction
+     * @OA\Get(
+     *     path="/v1/methods/deactivate/{id}",
+     *     tags={"Methods"},
+     *     summary="Deactivate a payment method",
+     *     operationId="deactivateAction",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the payment method to deactivate",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment Method Deactivated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Deactivated")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment Method Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Not Found")
+     *         )
+     *     )
+     * )
      *
-     * @param Request $request [explicite description]
-     * @param Response $response [explicite description]
-     * @param $args $args [explicite description]
-     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
      * @return Response
      */
     public function deactivateAction(Request $request, Response $response, $args): Response
@@ -151,6 +272,40 @@ final class MethodsController extends A_Controller
         return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * @OA\Get(
+     *     path="/v1/methods/reactivate/{id}",
+     *     tags={"Methods"},
+     *     summary="Reactivate a payment method",
+     *     operationId="reactivateAction",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the payment method to reactivate",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment Method Reactivated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Reactivated")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment Method Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Not Found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
     public function reactivateAction(Request $request, Response $response, $args): Response
     {
         $id = $args['id'];
@@ -172,6 +327,47 @@ final class MethodsController extends A_Controller
         return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * @OA\Put(
+     *     path="/v1/methods/{id}",
+     *     tags={"Methods"},
+     *     summary="Update a payment method",
+     *     operationId="updateAction",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the payment method to update",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="name", type="string", example="Credit Card"),
+     *             @OA\Property(property="isActive", type="boolean", example=true)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment Method Updated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Updated")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment Method Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment Method Not Found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
     public function updateAction(Request $request, Response $response, $args): Response
     {
         $id = $args['id'];
@@ -195,6 +391,4 @@ final class MethodsController extends A_Controller
         $response->getBody()->write(json_encode(['message' => 'Payment Method Updated']));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
-
 }
-
