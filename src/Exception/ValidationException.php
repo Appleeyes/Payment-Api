@@ -3,7 +3,7 @@
 namespace PaymentApi\Exception;
 
 
-class DatabaseException extends A_Exception
+class ValidationException extends A_Exception
 {
     
 }

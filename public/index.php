@@ -6,7 +6,6 @@ use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
-use Swagger\scan;
 
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -18,15 +17,7 @@ $dotenv->safeLoad();
 
 $app = AppFactory::createFromContainer(container: $container);
 
-function getBasePath()
-{
-    $requestUri = $_SERVER['REQUEST_URI'];
-    $scriptName = $_SERVER['SCRIPT_NAME'];
-    return substr($requestUri, 0, strpos($requestUri, $scriptName));
-}
-
 $app->get('/api-docs', function (Request $request, Response $response) {
-    // Include the Swagger UI HTML page
     include __DIR__ . '/swagger-ui/dist/index.html';
     return $response;
 });
@@ -38,6 +29,10 @@ $app->group('/v1/methods', function (RouteCollectorProxy $group) {
     $group->get('/deactivate/{id:[0-9]+}', '\PaymentApi\Controller\MethodsController:deactivateAction');
     $group->get('/reactivate/{id:[0-9]+}', '\PaymentApi\Controller\MethodsController:reactivateAction');
     $group->put('/{id:[0-9]+}', '\PaymentApi\Controller\MethodsController:updateAction');
+});
+
+$app->group('/v1/customers', function (RouteCollectorProxy $group) {
+    $group->get('', '\PaymentApi\Controller\CustomersController:indexAction');
 });
 $handler = new ErrorHandler($app);
 

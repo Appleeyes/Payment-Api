@@ -40,7 +40,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods",
      *     tags={"Methods"},
      *     summary="Retrieve a list of payment methods",
-     *     operationId="indexAction",
+     *     operationId="getMethods",
      *     @OA\Response(
      *         response="200",
      *         description="Successful operation",
@@ -102,7 +102,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods",
      *     tags={"Methods"},
      *     summary="Create a new payment method",
-     *     operationId="createAction",
+     *     operationId="createMethods",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -170,7 +170,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods/{id}",
      *     tags={"Methods"},
      *     summary="Delete a payment method",
-     *     operationId="removeAction",
+     *     operationId="removemethods",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -222,7 +222,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods/deactivate/{id}",
      *     tags={"Methods"},
      *     summary="Deactivate a payment method",
-     *     operationId="deactivateAction",
+     *     operationId="deactivateMethods",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -277,7 +277,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods/reactivate/{id}",
      *     tags={"Methods"},
      *     summary="Reactivate a payment method",
-     *     operationId="reactivateAction",
+     *     operationId="reactivateMethods",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -332,7 +332,7 @@ final class MethodsController extends A_Controller
      *     path="/v1/methods/{id}",
      *     tags={"Methods"},
      *     summary="Update a payment method",
-     *     operationId="updateAction",
+     *     operationId="updateMethods",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

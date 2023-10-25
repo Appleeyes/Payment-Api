@@ -4,16 +4,70 @@
         {
             "url": "http://localhost:4000",
             "description": "Payment API Server"
+        },
+        {
+            "url": "http://localhost:4000",
+            "description": "Payment API Server"
         }
     ],
     "paths": {
+        "/v1/customers": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Retrieve a list of customers",
+                "operationId": "getCustomers",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Customers list retrieved."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "firstName": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastName": {
+                                                        "type": "string"
+                                                    },
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "isActive": {
+                                                        "type": "boolean"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/methods": {
             "get": {
                 "tags": [
                     "Methods"
                 ],
                 "summary": "Retrieve a list of payment methods",
-                "operationId": "indexAction",
+                "operationId": "getMethods",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
@@ -55,7 +109,7 @@
                     "Methods"
                 ],
                 "summary": "Create a new payment method",
-                "operationId": "createAction",
+                "operationId": "createMethods",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -134,7 +188,7 @@
                     "Methods"
                 ],
                 "summary": "Update a payment method",
-                "operationId": "updateAction",
+                "operationId": "updateMethods",
                 "parameters": [
                     {
                         "name": "id",
@@ -206,7 +260,7 @@
                     "Methods"
                 ],
                 "summary": "Delete a payment method",
-                "operationId": "removeAction",
+                "operationId": "removemethods",
                 "parameters": [
                     {
                         "name": "id",
@@ -260,7 +314,7 @@
                     "Methods"
                 ],
                 "summary": "Deactivate a payment method",
-                "operationId": "deactivateAction",
+                "operationId": "deactivateMethods",
                 "parameters": [
                     {
                         "name": "id",
@@ -314,7 +368,7 @@
                     "Methods"
                 ],
                 "summary": "Reactivate a payment method",
-                "operationId": "reactivateAction",
+                "operationId": "reactivateMethods",
                 "parameters": [
                     {
                         "name": "id",
@@ -366,14 +420,14 @@
     "components": {
         "responses": {
             "404": {
-                "description": "No payment methods found",
+                "description": "No customers found",
                 "content": {
                     "application/json": {
                         "schema": {
                             "properties": {
                                 "message": {
                                     "type": "string",
-                                    "example": "No payment methods found"
+                                    "example": "No customers found"
                                 }
                             },
                             "type": "object"
