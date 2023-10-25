@@ -1,3 +1,8 @@
 {"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T16:27:37.343378+00:00","extra":{}}
 {"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-25T18:40:04.233197+02:00","extra":{}}
 {"message":"No customer found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:19:30.698405+00:00","extra":{}}
+{"message":"Invalid Data.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:33:16.130780+00:00","extra":{}}
+{"message":"Invalid Data.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:36:46.859852+00:00","extra":{}}
+{"message":"Invalid Data.","context":{"statusCode":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:38:17.135654+00:00","extra":{}}
+{"message":"Customer created.","context":{"customer_id":1},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:52:03.053665+00:00","extra":{}}
+{"message":"Customer created.","context":{"customer_id":2},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:53:58.589544+00:00","extra":{}}

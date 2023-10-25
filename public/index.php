@@ -33,6 +33,7 @@ $app->group('/v1/methods', function (RouteCollectorProxy $group) {
 
 $app->group('/v1/customers', function (RouteCollectorProxy $group) {
     $group->get('', '\PaymentApi\Controller\CustomersController:indexAction');
+    $group->post('', '\PaymentApi\Controller\CustomersController:createAction');
 });
 $handler = new ErrorHandler($app);
 

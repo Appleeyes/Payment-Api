@@ -102,5 +102,93 @@ final class CustomersController extends A_Controller
     }
 
 
+    /**
+     * @OA\Post(
+     *     path="/v1/customers",
+     *     tags={"Customers"},
+     *     summary="Create a new customer",
+     *     operationId="createCustomer",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="firstName", type="string", example="John"),
+     *             @OA\Property(property="lastName", type="string", example="Doe"),
+     *             @OA\Property(property="email", type="string", example="JohnDoe@email.com"),
+     *             @OA\Property(property="isActive", type="boolean", example="true")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Customer created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer created successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Invalid data",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid data")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Error creating customer",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Error creating customer")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return ResponseInterface
+     */
+    public function createAction(Request $request, Response $response): ResponseInterface
+    {
+        $parsedBody = $request->getParsedBody();
+        $contentType = $request->getHeaderLine('Content-Type');
 
+        if (empty($parsedBody)) {
+            $jsonBody = json_decode($request->getBody()->getContents(), true);
+            if (!empty($jsonBody)) {
+                $data = $jsonBody;
+            } else {
+                $this->logger->info('Invalid Data.', ['statusCode' => 400]);
+                $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+                return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            }
+        } else {
+            $data = $parsedBody;
+        }
+
+        if (empty($data['firstName']) || empty($data['lastName']) || empty($data['email'])) {
+            $this->logger->info('Invalid Data.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
+        $customer = new Customers();
+        $customer->setFirstName($data['firstName']);
+        $customer->setLastName($data['lastName']);
+        $customer->setEmail($data['email']);
+        $customer->setIsActive('isActive');
+
+        try {
+            $this->customersRepository->store($customer);
+
+            $this->logger->info('Customer created.', ['customer_id' => $customer->getId()]);
+
+            $response->getBody()->write(json_encode(['message' => 'Customer created successfully', 'customer_id' => $customer->getId()]));
+            return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+        } catch (\Exception $e) {
+            $this->logger->error('Error creating customer: ' . $e->getMessage());
+            $response->getBody()->write(json_encode(['message' => 'Error creating customer']));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
+    }
+
+
+
+    
 }
