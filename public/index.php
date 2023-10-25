@@ -37,6 +37,7 @@ $app->group('/v1/customers', function (RouteCollectorProxy $group) {
     $group->delete('/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:removeAction');
     $group->get('/deactivate/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:deactivateAction');
     $group->get('/reactivate/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:reactivateAction');
+    $group->put('/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:updateAction');
 });
 $handler = new ErrorHandler($app);
 

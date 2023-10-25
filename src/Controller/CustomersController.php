@@ -347,6 +347,72 @@ final class CustomersController extends A_Controller
         return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * @OA\Put(
+     *     path="/v1/customers/{id}",
+     *     tags={"Customers"},
+     *     summary="Update a Customer",
+     *     operationId="updateCustomer",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the Customer to update",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="firstName", type="string", example="John"),
+     *             @OA\Property(property="lastName", type="string", example="Doe"),
+     *             @OA\Property(property="email", type="string", example="JohnDoe@email.com"),
+     *             @OA\Property(property="isActive", type="boolean", example="true")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Customer Updated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Updated")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Customer Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Not Found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
+    public function updateAction(Request $request, Response $response, $args): Response
+    {
+        $id = $args['id'];
 
-   
+        $customer = $this->customersRepository->findById($id);
+
+        if (!$customer) {
+            $this->logger->info('Customer Not Found.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Customer Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $data = json_decode($request->getBody(), true);
+
+        $customer->setFirstName($data['firstName']);
+        $customer->setLastName($data['lastName']);
+        $customer->setEmail($data['email']);
+        $customer->setIsActive($data['isActive']);
+
+        $this->customersRepository->update($customer);
+
+        $this->logger->info('Customer Updated.', ['statusCode' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Customer Updated']));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+    }
 }

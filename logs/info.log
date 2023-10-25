@@ -35,3 +35,4 @@
 {"message":"Customer deleted.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:14:43.534892+00:00","extra":{}}
 {"message":"Customer Deactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:23:21.408094+00:00","extra":{}}
 {"message":"Customer Reactivated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:30:56.070744+00:00","extra":{}}
+{"message":"Customer Updated.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:46:35.260729+00:00","extra":{}}
