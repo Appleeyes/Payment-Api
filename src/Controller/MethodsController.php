@@ -139,7 +139,21 @@ final class MethodsController extends A_Controller
      */
     public function createAction(Request $request, Response $response): ResponseInterface
     {
-        $data = $request->getParsedBody();
+        $parsedBody = $request->getParsedBody();
+        $contentType = $request->getHeaderLine('Content-Type');
+
+        if (empty($parsedBody)) {
+            $jsonBody = json_decode($request->getBody()->getContents(), true);
+            if (!empty($jsonBody)) {
+                $data = $jsonBody;
+            } else {
+                $this->logger->info('Invalid Data.', ['statusCode' => 400]);
+                $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+                return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            }
+        } else {
+            $data = $parsedBody;
+        }
 
         if (!$data || empty($data['name'])) {
             $this->logger->info('Invalid Data.', ['statusCode' => 404]);
