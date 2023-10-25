@@ -239,5 +239,60 @@ final class CustomersController extends A_Controller
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 
+    /**
+     * @OA\Get(
+     *     path="/v1/customers/deactivate/{id}",
+     *     tags={"Customers"},
+     *     summary="Deactivate a Customer",
+     *     operationId="deactivateCustomer",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the Customer to deactivate",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Customer Deactivated",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Deactivated")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Customer Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Not Found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
+    public function deactivateAction(Request $request, Response $response, $args): Response
+    {
+        $id = $args['id'];
 
+        $customer = $this->customersRepository->findById($id);
+
+        if (!$customer) {
+            $this->logger->info('Customer Not Found.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Customer Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $customer->setIsActive(false);
+        $this->customersRepository->update($customer);
+
+        $this->logger->info('Customer Deactivated.', ['statusCode' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Customer Deactivated']));
+        return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+    }
+
+
+    
 }
