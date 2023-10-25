@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  * @OA\Info(
  *     title="Payment API",
  *     version="1.0",
- *     description="API for managing payment customers.",
+ *     description="API for managing Customers.",
  * )
  */
 
@@ -100,7 +100,6 @@ final class CustomersController extends A_Controller
             ->withHeader('Content-Type', 'application/json')
             ->withStatus($statusCode);
     }
-
 
     /**
      * @OA\Post(
@@ -188,7 +187,57 @@ final class CustomersController extends A_Controller
         }
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/v1/customers/{id}",
+     *     tags={"Customers"},
+     *     summary="Delete a customer",
+     *     operationId="removeCustomer",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID of the customer to delete",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Customer Deleted",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Deleted")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Customer Not Found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Customer Not Found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param $args
+     * @return Response
+     */
+    public function removeAction(Request $request, Response $response, $args): Response
+    {
+        $id = $args['id'];
+
+        $customer = $this->customersRepository->findById($id);
+
+        if (!$customer) {
+            $this->logger->info('Customer Not Found.', ['statusCode' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Customer Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $this->customersRepository->remove($customer);
+        $this->logger->info('Customer deleted.', ['statusCode' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Customer Deleted']));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+    }
 
 
-    
 }

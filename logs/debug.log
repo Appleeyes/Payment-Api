@@ -8,3 +8,4 @@
 {"message":"Customer created.","context":{"customer_id":2},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T17:53:58.589544+00:00","extra":{}}
 {"message":"Customer created.","context":{"customer_id":3},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:00:23.703159+00:00","extra":{}}
 {"message":"Customer created.","context":{"customer_id":4},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:01:40.267176+00:00","extra":{}}
+{"message":"Customer deleted.","context":{"statusCode":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-25T18:14:43.534892+00:00","extra":{}}

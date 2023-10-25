@@ -34,6 +34,7 @@ $app->group('/v1/methods', function (RouteCollectorProxy $group) {
 $app->group('/v1/customers', function (RouteCollectorProxy $group) {
     $group->get('', '\PaymentApi\Controller\CustomersController:indexAction');
     $group->post('', '\PaymentApi\Controller\CustomersController:createAction');
+    $group->delete('/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:removeAction');
 });
 $handler = new ErrorHandler($app);
 
