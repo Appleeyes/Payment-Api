@@ -8,6 +8,10 @@
         {
             "url": "http://localhost:4000",
             "description": "Payment API Server"
+        },
+        {
+            "url": "http://localhost:4000",
+            "description": "Payment API Server"
         }
     ],
     "paths": {
@@ -733,6 +737,58 @@
                                         "message": {
                                             "type": "string",
                                             "example": "Payment Method Not Found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/payments": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Retrieve a list of payments transactions",
+                "operationId": "getPayments",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Payments transactions list retrieved."
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "customer_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "method_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "amount": {
+                                                        "type": "number",
+                                                        "format": "float"
+                                                    },
+                                                    "payment_date": {
+                                                        "type": "string",
+                                                        "format": "date"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         }
                                     },
                                     "type": "object"

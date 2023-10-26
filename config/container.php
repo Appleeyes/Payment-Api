@@ -13,6 +13,8 @@ use PaymentApi\Repository\CustomersRepository;
 use PaymentApi\Repository\CustomersRepositoryDoctrine;
 use PaymentApi\Repository\MethodsRepository;
 use PaymentApi\Repository\MethodsRepositoryDoctrine;
+use PaymentApi\Repository\PaymentsRepository;
+use PaymentApi\Repository\PaymentsRepositoryDoctrine;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
@@ -89,6 +91,11 @@ $container->set(MethodsRepository::class, function (ContainerInterface $containe
 $container->set(CustomersRepository::class, function (ContainerInterface $container) {
     $entityManager = $container->get(EntityManager::class);
     return new CustomersRepositoryDoctrine($entityManager);
+});
+
+$container->set(PaymentsRepository::class, function (ContainerInterface $container) {
+    $entityManager = $container->get(EntityManager::class);
+    return new PaymentsRepositoryDoctrine($entityManager);
 });
 
 

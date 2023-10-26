@@ -39,6 +39,11 @@ $app->group('/v1/customers', function (RouteCollectorProxy $group) {
     $group->get('/reactivate/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:reactivateAction');
     $group->put('/{id:[0-9]+}', '\PaymentApi\Controller\CustomersController:updateAction');
 });
+
+$app->group('/v1/payments', function (RouteCollectorProxy $group) {
+    $group->get('', '\PaymentApi\Controller\PaymentsController:indexAction');
+    
+});
 $handler = new ErrorHandler($app);
 
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
