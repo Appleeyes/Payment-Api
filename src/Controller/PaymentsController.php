@@ -258,4 +258,106 @@ final class PaymentsController extends A_Controller
         $response->getBody()->write(json_encode(['message' => 'Payment transaction deleted successfully']));
         return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * @OA\Put(
+     *     path="/v1/payments/{id}",
+     *     tags={"Payments"},
+     *     summary="Update a payment transaction by ID",
+     *     operationId="updatePayment",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the payment transaction to update",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="customer_id", type="integer"),
+     *             @OA\Property(property="method_id", type="integer"),
+     *             @OA\Property(property="amount", type="number", format="float"),
+     *             @OA\Property(property="payment_date", type="string", format="date"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment transaction updated successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment transaction updated successfully"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Invalid customer or payment method ID",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid customer or payment method ID"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment transaction not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment transaction not found"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="500",
+     *         description="Error updating payment transaction",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Error updating payment transaction"),
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return ResponseInterface
+     */
+    public function updateAction(Request $request, Response $response, array $args): ResponseInterface
+    {
+        $paymentId = (int)$args['id'];
+
+        $data = json_decode($request->getBody(), true);
+
+        $customer = $this->customersRepository->findById($data['customer_id']);
+        $method = $this->methodsRepository->findById($data['method_id']);
+
+        if (!$customer) {
+            $this->logger->info('Invalid Customer ID.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid customer ID']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        } else if (!$method) {
+            $this->logger->info('Invalid payment method ID.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid payment method ID']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
+        $payment = $this->paymentsRepository->findById($paymentId);
+
+        if (!$payment) {
+            $this->logger->info('Payment transaction not found.', ['status_code' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Payment Transaction Not Found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $payment->setCustomer($customer);
+        $payment->setPaymentMethod($method);
+        $payment->setAmount($data['amount']);
+        $payment->setPaymentDate(new \DateTime($data['payment_date']));
+
+        try {
+            $this->paymentsRepository->update($payment);
+            $this->logger->info('Payment transaction updated.', ['payment_id' => $payment->getId()]);
+            $response->getBody()->write(json_encode(['message' => 'Payment transaction updated successfully']));
+            return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+        } catch (\Exception $e) {
+            $this->logger->error('Error updating payment transaction: ' . $e->getMessage());
+            $response->getBody()->write(json_encode(['message' => 'Error updating payment transaction']));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
+    }
 }
