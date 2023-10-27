@@ -23,3 +23,17 @@
 {"message":"No payment transaction found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-26T17:54:17.846958+00:00","extra":{}}
 {"message":"Payment transaction created.","context":{"payment_id":1},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T17:42:03.797906+00:00","extra":{}}
 {"message":"Invalid Customer ID.","context":{"statusCode":400},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T17:43:25.898971+00:00","extra":{}}
+{"message":"Payment transaction created.","context":{"payment_id":2},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T17:53:49.601460+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-27T17:57:05.790667+00:00","extra":{}}
+{"message":"Payment transaction deleted successfully.","context":{"status_code":204},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T17:58:51.768687+00:00","extra":{}}
+{"message":"Payment transaction not found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:01:25.375011+00:00","extra":{}}
+{"message":"Payment transaction created.","context":{"payment_id":3},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:02:50.319888+00:00","extra":{}}
+{"message":"Payment transaction deleted successfully.","context":{"status_code":204},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:03:38.182776+00:00","extra":{}}
+{"message":"Invalid Data.","context":{"statusCode":400},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:12:28.500252+00:00","extra":{}}
+{"message":"Payment transaction created.","context":{"payment_id":4},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:13:21.290089+00:00","extra":{}}
+{"message":"Payment transaction deleted successfully.","context":{"status_code":204},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:14:50.903347+00:00","extra":{}}
+{"message":"Payment transaction created.","context":{"payment_id":5},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:20:53.205099+00:00","extra":{}}
+{"message":"Payment transaction created.","context":{"payment_id":6},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:22:43.389621+00:00","extra":{}}
+{"message":"Payment transaction deleted successfully.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:23:43.927626+00:00","extra":{}}
+{"message":"Payment transaction not found.","context":{"status_code":404},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:25:45.284326+00:00","extra":{}}
+{"message":"Payment transaction deleted successfully.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:26:59.191243+00:00","extra":{}}

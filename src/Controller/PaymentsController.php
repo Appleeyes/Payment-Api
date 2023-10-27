@@ -32,11 +32,11 @@ final class PaymentsController extends A_Controller
     private MethodsRepository $methodsRepository;
 
     public function __construct(
-        ContainerInterface $container, 
-        PaymentsRepository $paymentsRepository, 
-        CustomersRepository $customerRepository, 
-        MethodsRepository $methodsRepository)
-    {
+        ContainerInterface $container,
+        PaymentsRepository $paymentsRepository,
+        CustomersRepository $customerRepository,
+        MethodsRepository $methodsRepository
+    ) {
         parent::__construct($container);
         $this->paymentsRepository = $paymentsRepository;
         $this->customersRepository = $customerRepository;
@@ -182,7 +182,7 @@ final class PaymentsController extends A_Controller
             $this->logger->info('Invalid Customer ID.', ['statusCode' => 400]);
             $response->getBody()->write(json_encode(['message' => 'Invalid customer ID']));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
-        }else if(!$method){
+        } else if (!$method) {
             $this->logger->info('Invalid payment method ID.', ['statusCode' => 400]);
             $response->getBody()->write(json_encode(['message' => 'Invalid payment method ID']));
             return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
@@ -206,5 +206,56 @@ final class PaymentsController extends A_Controller
             $response->getBody()->write(json_encode(['message' => 'Error creating payment transaction']));
             return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
         }
+    }
+
+    /**
+     * @OA\Delete(
+     *     path="/v1/payments/{id}",
+     *     tags={"Payments"},
+     *     summary="Delete a payment transaction by ID",
+     *     operationId="removePayment",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="ID of the payment transaction to delete",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment transaction deleted successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment transaction deleted successfully")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Payment transaction not found",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment transaction not found")
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return ResponseInterface
+     */
+    public function removeAction(Request $request, Response $response, array $args): ResponseInterface
+    {
+        $paymentId = (int)$args['id'];
+
+        $payment = $this->paymentsRepository->findById($paymentId);
+
+        if (!$payment) {
+            $this->logger->info('Payment transaction not found.', ['status_code' => 404]);
+            $response->getBody()->write(json_encode(['message' => 'Payment transaction not found']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $this->paymentsRepository->remove($payment);
+        $this->logger->info('Payment transaction deleted successfully.', ['status_code' => 200]);
+        $response->getBody()->write(json_encode(['message' => 'Payment transaction deleted successfully']));
+        return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
     }
 }
