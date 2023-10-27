@@ -2,6 +2,9 @@
 
 namespace PaymentApi\Controller;
 
+use PaymentApi\Model\Payments;
+use PaymentApi\Repository\CustomersRepository;
+use PaymentApi\Repository\MethodsRepository;
 use PaymentApi\Repository\PaymentsRepository;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -25,11 +28,19 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 final class PaymentsController extends A_Controller
 {
     private PaymentsRepository $paymentsRepository;
+    private CustomersRepository $customersRepository;
+    private MethodsRepository $methodsRepository;
 
-    public function __construct(ContainerInterface $container, PaymentsRepository $paymentsRepository)
+    public function __construct(
+        ContainerInterface $container, 
+        PaymentsRepository $paymentsRepository, 
+        CustomersRepository $customerRepository, 
+        MethodsRepository $methodsRepository)
     {
         parent::__construct($container);
         $this->paymentsRepository = $paymentsRepository;
+        $this->customersRepository = $customerRepository;
+        $this->methodsRepository = $methodsRepository;
     }
 
     /**
@@ -96,5 +107,104 @@ final class PaymentsController extends A_Controller
         return $response
             ->withHeader('Content-Type', 'application/json')
             ->withStatus($statusCode);
+    }
+
+    /**
+     * @OA\Post(
+     *     path="/v1/payments",
+     *     tags={"Payments"},
+     *     summary="Create a new payment transaction",
+     *     operationId="createPayment",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="customer_id", type="integer"),
+     *             @OA\Property(property="method_id", type="integer"),
+     *             @OA\Property(property="amount", type="number", format="float"),
+     *             @OA\Property(property="payment_date", type="string", format="date"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Payment transaction created successfully",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Payment transaction created successfully"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="400",
+     *         description="Invalid data provided",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid data provided."),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Invalid Customer or Payment method ID",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="message", type="string", example="Invalid customer or payment method ID."),
+     *         )
+     *     )
+     * )
+     *
+     * @param Request $request
+     * @param Response $response
+     * @return ResponseInterface
+     */
+    public function createAction(Request $request, Response $response): ResponseInterface
+    {
+        $parsedBody = $request->getParsedBody();
+        $contentType = $request->getHeaderLine('Content-Type');
+
+        if (empty($parsedBody)) {
+            $jsonBody = json_decode($request->getBody()->getContents(), true);
+            if (!empty($jsonBody)) {
+                $data = $jsonBody;
+            } else {
+                $this->logger->info('Invalid Data.', ['statusCode' => 400]);
+                $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+                return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+            }
+        } else {
+            $data = $parsedBody;
+        }
+
+        if (!$data || empty($data['customer_id']) || empty($data['method_id']) || empty($data['amount']) || empty($data['payment_date'])) {
+            $this->logger->info('Invalid Data.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid data']));
+            return $response->withStatus(400)->withHeader('Content-Type', 'application/json');
+        }
+
+        $customer = $this->customersRepository->findById($data['customer_id']);
+        $method = $this->methodsRepository->findById($data['method_id']);
+
+        if (!$customer) {
+            $this->logger->info('Invalid Customer ID.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid customer ID']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }else if(!$method){
+            $this->logger->info('Invalid payment method ID.', ['statusCode' => 400]);
+            $response->getBody()->write(json_encode(['message' => 'Invalid payment method ID']));
+            return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
+        }
+
+        $payment = new Payments();
+        $payment->setCustomer($customer);
+        $payment->setPaymentMethod($method);
+        $payment->setAmount($data['amount']);
+        $payment->setPaymentDate(new \DateTime($data['payment_date']));
+
+        try {
+            $this->paymentsRepository->store($payment);
+
+            $this->logger->info('Payment transaction created.', ['payment_id' => $payment->getId()]);
+
+            $response->getBody()->write(json_encode(['message' => 'Payment transaction created successfully']));
+            return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+        } catch (\Exception $e) {
+            $this->logger->error('Error creating payment transaction: ' . $e->getMessage());
+            $response->getBody()->write(json_encode(['message' => 'Error creating payment transaction']));
+            return $response->withStatus(500)->withHeader('Content-Type', 'application/json');
+        }
     }
 }
