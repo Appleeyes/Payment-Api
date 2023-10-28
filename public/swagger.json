@@ -23,45 +23,61 @@
                 "summary": "Retrieve a list of customers",
                 "operationId": "getCustomers",
                 "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Customers list retrieved."
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "firstName": {
-                                                        "type": "string"
-                                                    },
-                                                    "lastName": {
-                                                        "type": "string"
-                                                    },
-                                                    "email": {
-                                                        "type": "string"
-                                                    },
-                                                    "isActive": {
-                                                        "type": "boolean"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                  "200": {
+                    "description": "Successful operation",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "Customers list retrieved."
+                            },
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "firstName": {
+                                    "type": "string"
+                                  },
+                                  "lastName": {
+                                    "type": "string"
+                                  },
+                                  "email": {
+                                    "type": "string"
+                                  },
+                                  "isActive": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              }
                             }
+                          },
+                          "type": "object"
                         }
+                      }
                     }
+                  },
+                  "404": {
+                    "description": "No customers found",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "No customers found"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
                 }
             },
             "post": {
@@ -400,39 +416,55 @@
                 "summary": "Retrieve a list of payment methods",
                 "operationId": "getMethods",
                 "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Payment Methods list retrieved."
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "name": {
-                                                        "type": "string"
-                                                    },
-                                                    "isActive": {
-                                                        "type": "boolean"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                  "200": {
+                    "description": "Successful operation",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "Payment Methods list retrieved."
+                            },
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "isActive": {
+                                    "type": "boolean"
+                                  }
+                                },
+                                "type": "object"
+                              }
                             }
+                          },
+                          "type": "object"
                         }
+                      }
                     }
+                  },
+                  "404": {
+                    "description": "No payment methods  found",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "No payment methods found"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
                 }
             },
             "post": {
@@ -755,47 +787,63 @@
                 "summary": "Retrieve a list of payments transactions",
                 "operationId": "getPayments",
                 "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Payments transactions list retrieved."
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "customer_id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "method_id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "amount": {
-                                                        "type": "number",
-                                                        "format": "float"
-                                                    },
-                                                    "payment_date": {
-                                                        "type": "string",
-                                                        "format": "date"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                  "200": {
+                    "description": "Successful operation",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "Payments transactions list retrieved."
+                            },
+                            "data": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "id": {
+                                    "type": "integer"
+                                  },
+                                  "customer_id": {
+                                    "type": "integer"
+                                  },
+                                  "method_id": {
+                                    "type": "integer"
+                                  },
+                                  "amount": {
+                                    "type": "number",
+                                    "format": "float"
+                                  },
+                                  "payment_date": {
+                                    "type": "string",
+                                    "format": "date"
+                                  }
+                                },
+                                "type": "object"
+                              }
                             }
+                          },
+                          "type": "object"
                         }
+                      }
                     }
+                  },
+                  "404": {
+                    "description": "No payment transactions found",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "properties": {
+                            "message": {
+                              "type": "string",
+                              "example": "No payment transactions found"
+                            }
+                          },
+                          "type": "object"
+                        }
+                      }
+                    }
+                  }
                 }
             },
             "post": {
@@ -1041,26 +1089,6 @@
                                     "type": "object"
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "responses": {
-            "404": {
-                "description": "No customers found",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "properties": {
-                                "message": {
-                                    "type": "string",
-                                    "example": "No customers found"
-                                }
-                            },
-                            "type": "object"
                         }
                     }
                 }
