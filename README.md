@@ -8,6 +8,9 @@ Payment API is a RESTful web service for managing payment transactions.
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+- [JWT Authentication](#jwt-authentication)
+  - [Generating a JWT Token](#generating-a-jwt-token)
+  - [Protecting Endpoints](#protecting-endpoints)
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Documentation](#documentation)
@@ -60,6 +63,49 @@ Before you begin, ensure you have met the following requirements:
 
    ```shell
    docker-compose up
+
+## JWT Authentication
+
+JWT (JSON Web Tokens) is used for user authentication in the Payment API. JWT is a secure means of representing claims between two parties. In this project, you can generate a JWT token and protect your API endpoints with it.
+
+### Generating a JWT Token
+
+To generate a JWT token, you can use the provided script generateToken.php. This script takes care of encoding the JWT token with your secret key. You can access the token via the `/generate-token` endpoint. Here's how you can generate a token:
+
+First, make sure you have generated your `JWT_SECRET_KEY` in your `.env` file. You can use the `generate.php` file to generate a random one by running `php generate.php` in your terminal, add the result to `JWT_SECRET_KEY=` in your `.env` file. Make sure you are in the base directory whil e running the command.
+
+Then you can go ahead and generate a token by running:
+
+- CURL request:
+
+  ```shell
+   curl -X GET http://localhost:your-port/generate-token
+
+- API Client request:
+
+   ```shell
+   GET http://localhost:your-port/generate-token
+
+Replace `your-port` with the actual port number where your API is running.
+
+### Protecting Endpoints
+
+JWT is used to protect the API endpoints. To access protected endpoints, you need to include the generated JWT token in the Authorization header of your requests.
+
+#### Example Usage
+
+Here is an example of how you can make authenticated requests to the API:
+
+- CURL request:
+   ```
+   curl -X GET -H "Authorization: your-token" http://localhost:your-port/v1/methods
+
+- API Client request: (manually add an header before making yor request).
+  ``` 
+  - header= Authorization
+  - value = your_token
+   
+Replace `your-token` with the actual JWT token you generate from the `\generate-token` endpoint.
 
 
 ## Usage
