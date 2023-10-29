@@ -39,3 +39,23 @@
 {"message":"Payment transaction deleted successfully.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T18:26:59.191243+00:00","extra":{}}
 {"message":"Error updating payment transaction: Expected value of type \"PaymentApi\\Model\\Customers\" for association field \"PaymentApi\\Model\\Payments#$customer\", got \"int\" instead.","context":{},"level":400,"level_name":"ERROR","channel":"paymentAPI","datetime":"2023-10-27T19:01:30.445771+00:00","extra":{}}
 {"message":"Payment transaction updated.","context":{"payment_id":1},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-27T19:05:10.361742+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-28T17:57:55.109089+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-28T17:58:29.730314+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-28T19:59:54.339160+02:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-28T18:19:19.704468+00:00","extra":{}}
+{"message":"Not found.","context":{},"level":100,"level_name":"DEBUG","channel":"paymentAPI","datetime":"2023-10-28T18:19:45.429109+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:41:13.000037+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:41:43.746580+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:42:28.500773+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:42:51.009799+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:44:41.003704+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:45:44.950720+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:46:08.160142+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:47:31.623530+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:52:15.730144+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T18:58:40.074760+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T19:04:02.612605+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T19:04:05.301667+00:00","extra":{}}
+{"message":"Customer list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T19:05:58.252355+00:00","extra":{}}
+{"message":"Payment Methods list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T19:07:40.662272+00:00","extra":{}}
+{"message":"Payments transaction list retrieved.","context":{"status_code":200},"level":200,"level_name":"INFO","channel":"paymentAPI","datetime":"2023-10-29T19:08:40.767491+00:00","extra":{}}
