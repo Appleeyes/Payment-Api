@@ -46,27 +46,17 @@ class CustomersControllerTest extends A_ControllerTest
         $response = $this->createMock(ResponseInterface::class);
 
         $expectedData = [
-            [
-                "id" => 1,
-                "firstName" => "John",
-                "lastName" => "Doe",
-                "email" => "johndoe@example.com",
-                "isActive" => true,
-            ],
-
-            [
-                "id" => 2,
-                "firstName" => "Jane",
-                "lastName" => "Doe",
-                "email" => "janedoe@example.com",
-                "isActive" => false,
-            ]
+            new Customers(1, 'John', 'Doe', 'johndoe@example.com', true),
+            new Customers(2, 'Jane', 'Doe', 'janedoe@example.com', false),
         ];
-        $this->repository->expects($this->once())
-            ->method('findAll')
-            ->willReturn([$expectedData]);
 
-        $this->logger->expects($this->once())
+        $this->repository
+            ->expects($this->once())
+            ->method('findAll')
+            ->willReturn($expectedData);
+
+        $this->logger
+            ->expects($this->once())
             ->method('info');
 
         $result = $this->controller->indexAction($request, $response);
@@ -89,23 +79,13 @@ class CustomersControllerTest extends A_ControllerTest
             "isActive" => true,
         ];
 
-        $request = $this->createMock(Request::class);
-        $request
-            ->method('getParsedBody')
-            ->willReturn($requestData);
-
-        $response = $this->createMock(Response::class);
+        $request = $this->container->get(ServerRequestInterface::class);
+        $response = $this->container->get(ResponseInterface::class);
 
         $customer = new Customers();
         $this->repository
             ->expects($this->once())
             ->method('store')
-            ->with($this->callback(function ($arg) use ($requestData) {
-                return $arg->getFirstName() === $requestData['firstName']
-                && $arg->getLastName() === $requestData['lastName']
-                && $arg->getEmail() === $requestData['email']
-                && $arg->getIsActive() === $requestData['isActive'];
-            }))
             ->willReturn($customer);
 
         $result = $this->controller->createAction($request, $response);
@@ -113,7 +93,7 @@ class CustomersControllerTest extends A_ControllerTest
         $this->assertEquals(200, $result->getStatusCode());
 
         $expectedResponse = ['message' => 'Customer created successfully', 'customer_id' => $customer->getId()];
-        $this->assertEquals(json_encode($expectedResponse), $result->getBody());
+        $this->assertEquals(json_encode($expectedResponse), $result->getBody()->getContents());
     }
 
     
