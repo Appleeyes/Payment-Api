@@ -1,6 +1,9 @@
-# Payment API
+# Payment-Api
 
 Payment API is a RESTful web service for managing payment transactions.
+
+[![Build Status](https://github.com/Appleeyes/Payment-Api/workflows/CI/CD%20Workflow/badge.svg)](https://github.com/Appleeyes/Payment-Api/actions) [![License](https://img.shields.io/badge/License-Apache-blue.svg)](license) [![Repo Size](https://img.shields.io/github/repo-size/Appleeyes/Payment-Api.svg)]() [![Contributors](https://img.shields.io/github/contributors/Appleeyes/Payment-Api.svg)]() ![Code Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen) ![Last Commit](https://img.shields.io/github/last-commit/Appleeyes/Payment-Api)
+
 
 ## Table of Contents
 
@@ -102,8 +105,8 @@ Here is an example of how you can make authenticated requests to the API:
 
 - API Client request: (manually add an header before making yor request).
   ``` 
-  - header= Authorization
-  - value = your_token
+  >> header= Authorization
+  >> value = your_token
    
 Replace `your-token` with the actual JWT token you generate from the `\generate-token` endpoint.
 
@@ -155,4 +158,4 @@ Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [Apache](license) License.
