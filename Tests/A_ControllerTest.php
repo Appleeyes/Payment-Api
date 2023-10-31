@@ -1,6 +1,6 @@
 <?php
 
-namespace PaymentApiTests;
+namespace PaymentApi\Tests;
 
 use DI\Container;
 use Doctrine\ORM\EntityManager;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 class A_ControllerTest extends TestCase
 {
-    private Container $container;
+    protected Container $container;
 
     protected function setUp(): void
     {
@@ -33,7 +33,7 @@ class A_ControllerTest extends TestCase
 
         $this->container = $container;
     }
-    
+
     public function testCreateInstanceOfCustomersController()
     {
         $repository = $this->container->get(CustomersRepository::class);
