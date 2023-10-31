@@ -4,7 +4,6 @@ Payment API is a RESTful web service for managing payment transactions.
 
 [![Build Status](https://github.com/Appleeyes/Payment-Api/workflows/CI/CD%20Workflow/badge.svg)](https://github.com/Appleeyes/Payment-Api/actions) [![License](https://img.shields.io/badge/License-Apache-blue.svg)](license) [![Repo Size](https://img.shields.io/github/repo-size/Appleeyes/Payment-Api.svg)]() [![Contributors](https://img.shields.io/github/contributors/Appleeyes/Payment-Api.svg)]() ![Code Coverage](https://img.shields.io/badge/coverage-90%25-brightgreen) ![Last Commit](https://img.shields.io/github/last-commit/Appleeyes/Payment-Api)
 
-
 ## Table of Contents
 
 - [Features](#features)
@@ -110,7 +109,6 @@ Here is an example of how you can make authenticated requests to the API:
    
 Replace `your-token` with the actual JWT token you generate from the `\generate-token` endpoint.
 
-
 ## Usage
 
 You can start making API requests to manage payment transactions. You can use tools like curl, Postman, or any HTTP client to interact with the API.
@@ -150,7 +148,6 @@ The API documentation is available using Swagger/OpenAPI. Access it by visiting 
 ## Docker Setup
 
 This project is Dockerized for easier setup. Ensure you have Docker and Docker Compose installed, and then follow the installation instructions above to set up the environment.
-
 
 ## Contributing
 
