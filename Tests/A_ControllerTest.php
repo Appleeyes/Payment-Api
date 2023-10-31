@@ -11,10 +11,18 @@ use PaymentApi\Repository\CustomersRepository;
 use PaymentApi\Repository\CustomersRepositoryDoctrine;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * A_ControllerTest
+ */
 class A_ControllerTest extends TestCase
 {
     protected Container $container;
-
+    
+    /**
+     * Method setUp
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         $container = new Container();
@@ -33,7 +41,12 @@ class A_ControllerTest extends TestCase
 
         $this->container = $container;
     }
-
+    
+    /**
+     * Method testCreateInstanceOfCustomersController
+     *
+     * @return void
+     */
     public function testCreateInstanceOfCustomersController()
     {
         $repository = $this->container->get(CustomersRepository::class);

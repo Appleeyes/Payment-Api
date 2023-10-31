@@ -13,15 +13,37 @@ use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Throwable;
 
+/**
+ * ErrorHandler
+ */
 final class ErrorHandler
 {
     private Logger $logger;
-
+    
+    /**
+     * Method __construct
+     *
+     * @param private $app [explicite description]
+     *
+     * @return void
+     */
     public function __construct(private App $app)
     {
         $this->logger = $this->app->getContainer()->get(Logger::class);
     }
-
+    
+    /**
+     * Method __invoke
+     *
+     * @param Request $request [explicite description]
+     * @param Throwable $exception [explicite description]
+     * @param bool $displayErrorDetails [explicite description]
+     * @param bool $logErrors [explicite description]
+     * @param bool $logErrorDetails [explicite description]
+     * @param ?LoggerInterface $logger [explicite description]
+     *
+     * @return void
+     */
     public function __invoke(Request $request, Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails, ?LoggerInterface $logger = null)
     {
         $logger?->error($exception->getMessage());

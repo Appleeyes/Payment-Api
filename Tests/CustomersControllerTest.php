@@ -9,8 +9,16 @@ use PaymentApi\Model\Customers;
 use PaymentApi\Tests\A_ControllerTest;
 use Psr\Http\Message\StreamInterface;
 
+/**
+ * CustomersControllerTest
+ */
 class CustomersControllerTest extends A_ControllerTest
-{
+{    
+    /**
+     * Method testIndexAction
+     *
+     * @return void
+     */
     public function testIndexAction()
     {
         $customersRepository = $this->createMock(CustomersRepository::class);
@@ -50,7 +58,12 @@ class CustomersControllerTest extends A_ControllerTest
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
-
+    
+    /**
+     * Method testCreateAction
+     *
+     * @return void
+     */
     public function testCreateAction()
     {
         $customersRepository = Mockery::mock(CustomersRepository::class);
@@ -106,28 +119,29 @@ class CustomersControllerTest extends A_ControllerTest
 
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
-
+    
+    /**
+     * Method testRemoveAction
+     *
+     * @return void
+     */
     public function testRemoveAction()
     {
         $customersRepository = Mockery::mock(CustomersRepository::class);
 
-        // Set up expectations for the mock
         $customersRepository->shouldReceive('findById')
-        ->with(1) // Replace 1 with the expected customer ID to be removed
-        ->andReturn(new Customers()); // Return a mocked Customers object
+        ->with(1)
+        ->andReturn(new Customers());
 
         $customersRepository->shouldReceive('remove')
-        ->with(Mockery::type(Customers::class)); // Set the expectation to receive a Customers object
+        ->with(Mockery::type(Customers::class));
 
-        // Create a mock for Logger
         $logger = Mockery::mock(Logger::class);
         $logger->shouldReceive('info')
-        ->with('Customer deleted.', ['statusCode' => 200]); // Replace 1 with the expected customer ID
+        ->with('Customer deleted.', ['statusCode' => 200]);
 
-        // Inject the mock logger into the container
         $this->container->set(Logger::class, $logger);
 
-        // Create a mock for Request and Response
         $request = Mockery::mock(ServerRequestInterface::class);
         $response = Mockery::mock(ResponseInterface::class);
         $response->shouldReceive('getBody')
@@ -141,28 +155,26 @@ class CustomersControllerTest extends A_ControllerTest
         $response->shouldReceive('getStatusCode')
         ->andReturn(200);
 
-        // Create the CustomersController instance
         $controller = new CustomersController($this->container, $customersRepository);
 
-        // Call the remove action
         $result = $controller->removeAction($request, $response, ['id' => 1]);
 
-        // Assertions
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
-
+    
+    /**
+     * Method testDeactivateAction
+     *
+     * @return void
+     */
     public function testDeactivateAction()
     {
-        // Create a mock for CustomersRepository (implementing the CustomersRepository interface)
         $customersRepository = Mockery::mock(CustomersRepository::class);
 
-        // Define sample customer ID for testing
         $customerId = 1;
 
-        // Create a mock for the Customers model
         $customer = Mockery::mock(Customers::class);
 
-        // Set the expected behavior for the mock repository
         $customersRepository->shouldReceive('findById')
         ->with($customerId)
             ->andReturn($customer);
@@ -173,15 +185,12 @@ class CustomersControllerTest extends A_ControllerTest
         $customersRepository->shouldReceive('update')
         ->with($customer);
 
-        // Create a mock for the Monolog logger
         $logger = Mockery::mock(Logger::class);
         $logger->shouldReceive('info')
         ->with('Customer Deactivated.', ['statusCode' => 200]);
 
-        // Inject the mock logger into the container
         $this->container->set(Logger::class, $logger);
 
-        // Create a mock for Request and Response
         $request = Mockery::mock(ServerRequestInterface::class);
         $request->shouldReceive('getAttribute')
         ->with('id')
@@ -199,16 +208,18 @@ class CustomersControllerTest extends A_ControllerTest
         $response->shouldReceive('getStatusCode')
         ->andReturn(200);
 
-        // Create the CustomersController instance
         $controller = new CustomersController($this->container, $customersRepository);
 
-        // Call the deactivate action
         $result = $controller->deactivateAction($request, $response, ['id' => $customerId]);
 
-        // Assertions
         $this->assertInstanceOf(ResponseInterface::class, $result);
     }
-
+    
+    /**
+     * Method testReactivateAction
+     *
+     * @return void
+     */
     public function testReactivateAction()
     {
         $customersRepository = Mockery::mock(CustomersRepository::class);

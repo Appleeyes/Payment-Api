@@ -5,10 +5,20 @@ namespace PaymentApi\Repository;
 use Doctrine\ORM\EntityManager;
 use PaymentApi\Model\Customers;
 
+/**
+ * CustomersRepositoryDoctrine
+ */
 class CustomersRepositoryDoctrine implements CustomersRepository
 {
     private EntityManager $entityManager;
-
+    
+    /**
+     * Method __construct
+     *
+     * @param EntityManager $entityManager [explicite description]
+     *
+     * @return void
+     */
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
