@@ -25,10 +25,21 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  * )
  */
 
+/**
+ * MethodsController
+ */
 final class MethodsController extends A_Controller
 {
     private MethodsRepository $methodsRepository;
-
+    
+    /**
+     * Method __construct
+     *
+     * @param ContainerInterface $container [explicite description]
+     * @param MethodsRepository $methodsRepository [explicite description]
+     *
+     * @return void
+     */
     public function __construct(ContainerInterface $container, MethodsRepository $methodsRepository)
     {
         parent::__construct($container);

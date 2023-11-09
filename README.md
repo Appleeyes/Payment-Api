@@ -145,7 +145,7 @@ For detailed information about these endpoints and request/response formats, ple
 
 ## Documentation
 
-The API documentation is available using Swagger/OpenAPI. Access it by visiting http://localhost:4000/api-docs in your web browser.
+The API documentation is available using Swagger/OpenAPI. Access it by visiting http://localhost:4000/api-docs in your web browser. Make sure you change the port of you are using different port.
 
 ## Docker Setup
 

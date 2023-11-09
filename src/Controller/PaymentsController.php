@@ -25,18 +25,28 @@ use Psr\Http\Message\ServerRequestInterface as Request;
  *     description="Payment API Server"
  * )
  */
+/**
+ * PaymentsController
+ */
 final class PaymentsController extends A_Controller
 {
     private PaymentsRepository $paymentsRepository;
     private CustomersRepository $customersRepository;
     private MethodsRepository $methodsRepository;
-
-    public function __construct(
-        ContainerInterface $container,
-        PaymentsRepository $paymentsRepository,
-        CustomersRepository $customerRepository,
-        MethodsRepository $methodsRepository
-    ) {
+    
+        
+    /**
+     * Method __construct
+     *
+     * @param ContainerInterface $container [explicite description]
+     * @param PaymentsRepository $paymentsRepository [explicite description]
+     * @param CustomersRepository $customerRepository [explicite description]
+     * @param MethodsRepository $methodsRepository [explicite description]
+     *
+     * @return void
+     */
+    public function __construct(ContainerInterface $container, PaymentsRepository $paymentsRepository, CustomersRepository $customerRepository, MethodsRepository $methodsRepository)
+    {
         parent::__construct($container);
         $this->paymentsRepository = $paymentsRepository;
         $this->customersRepository = $customerRepository;
